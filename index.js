@@ -17,7 +17,7 @@ app.use(cors())
 
 const baseUrl= process.env.BASE_URL
 
-const port = process.env.PORT
+const port = process.env.BASE_URL.split(':')[2];
 
 app.get('/',(req,res)=>{
     res.send('Server is runnimg...')
@@ -35,7 +35,7 @@ app.get('/',(req,res)=>{
     .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
 
 app.listen(port,()=>{
-    console.log(`server is running on ${port}`)
+    console.log(`server is running on ${process.env.BASE_URL}`)
 })
 
 app.use('/users',userrouter)
