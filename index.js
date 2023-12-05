@@ -17,11 +17,11 @@ app.use(express.static(__dirname))
 app.use(cors())
 
 
-// const baseUrl= process.env.BASE_URL
+const baseUrl= process.env.BASE_URL  
 
 
-const baseUrl = new URL(process.env.BASE_URL);
-const port = baseUrl.port || 8003;
+// const baseUrl = new URL(process.env.BASE_URL);
+const port = process.env.port || 8003;
 
 app.get('/',(req,res)=>{
     res.send('Server is runnimg...')
