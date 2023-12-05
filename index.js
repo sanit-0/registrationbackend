@@ -31,12 +31,19 @@ app.get('/',(req,res)=>{
 //     .then(()=>console.log('conected!'))
 //     .catch(err => console.log(err))
 
-    mongoose.connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log('Connected to MongoDB Atlas'))
-    .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
+const connectToDatabase = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log('Connected to MongoDB Atlas');
+    } catch (error) {
+        console.error('Error connecting to MongoDB Atlas:', error);
+    }
+};
+
+connectToDatabase();
 
 app.listen(port,()=>{
     console.log(`server is running on ${process.env.BASE_URL}`)
