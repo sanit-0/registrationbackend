@@ -5,6 +5,8 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import userrouter from './routers/user.router'
+import { URL } from 'url';
+
 
 const app = express()
 
@@ -15,9 +17,11 @@ app.use(express.static(__dirname))
 app.use(cors())
 
 
-const baseUrl= process.env.BASE_URL
+// const baseUrl= process.env.BASE_URL
 
-const port = process.env.BASE_URL.split(':')[2];
+
+const baseUrl = new URL(process.env.BASE_URL);
+const port = baseUrl.port || 8003;
 
 app.get('/',(req,res)=>{
     res.send('Server is runnimg...')
